@@ -53,18 +53,17 @@ export const validate = async (
 
   const results = []
   // Load the CoinGecko tokenlist once to avoid additional requests
-  let cgret
-  let cg
-  try {
-    cgret = await fetch('https://tokens.coingecko.com/uniswap/all.json')
-    cg = await cgret.json()
-  } catch (err) {
-    console.error('fetch for CoinGecko token list failed', err)
-    results.push({
-      type: 'warning',
-      message: 'fetch for CoinGecko token list failed',
-    })
-  }
+try {
+  const cgret = await fetch('https://tokens.coingecko.com/uniswap/all.json')
+  const cg = await cgret.json()
+} catch (err) {
+  console.error('fetch for CoinGecko token list failed', err)
+  results.push({
+    type: 'warning',
+    message: 'fetch for CoinGecko token list failed',
+  })
+}
+
 
   for (const folder of folders) {
     // Make sure the data file exists
